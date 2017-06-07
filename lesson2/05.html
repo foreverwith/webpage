@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>函数传参，改变div任意属性的值</title>
+<style type="text/css">
+body,p{
+	margin: 0;padding: 0;
+}
+body{
+	color: #333;
+	font: 12px/1.5 Tahoma;
+	padding-top: 10px;
+}
+#outer{
+	margin: 0 auto;
+	width: 300px;
+}
+p{
+	margin-bottom: 10px;
+}
+button{
+	margin-right: 5px;
+}
+label{
+	
+	width: 5em;
+	display: inline-block;
+	text-align: right;
+}
+input{
+	font-family: inherit;
+	padding: 3px;
+	border:1px solid #ccc;
+}
+
+#div1{
+	width: 180px;
+	height:180px;
+	background: black;
+	color: #fff;
+	padding: 10px;
+	margin: 10px auto;
+}
+</style>
+<script type="text/javascript">
+var changeStyle=function(elem,name,value){
+	elem.style[name]=value;
+}
+window.onload=function(){
+	var oDiv=document.getElementById("div1");
+	var oBtn=document.getElementsByTagName("button");
+	var oInput=document.getElementsByTagName("input");
+	oBtn[0].onclick=function(){
+		changeStyle(oDiv,oInput[0].value,oInput[1].value);
+	},
+	oBtn[1].onclick=function(){
+		oDiv.removeAttribute("style");
+		//这里移除的style是节点里面声明的style，而不能移除className所带来的css样式，假如<p id="con" style=“color:red;”>JS进阶篇</p> 那么按了重置，red就会没有。
+修改：
+mychar.removeAttribute("class");
+	}
+}
+</script>
+</head>
+<body>
+<div id="outer">
+<p><label>属性名：</label><input type="text" value="background"></p>
+<p><label>属性值：</label><input type="text" value="blue"> </p>
+<p><label></label><button>确定</button><button>重置</button></p>
+</div>
+<div id="div1">
+在上方输入框输入“属性名”以及“属性值”，点击确定按钮查看效果。
+</div>
+
+</body>
+
+</html>
